@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>freezer</title>
+	<style>
+		body {
+			background: black;
+			font-family: arial;
+		}
+
+		#setter {
+			background: black;
+			border: 1px solid #222222;
+			padding: 8px;
+			color: #ccc;
+			width: 683px;
+			font-size: 24px;
+		}
+
+		#stop {
+			background: #222222;
+			border: 1px solid #222222;
+			color: green;
+			padding: 8px;
+			font-size: 24px;
+			width: 100px;
+		}
+
+	</style>
+</head>
+<body>
+
+<canvas id="freezer" width="600" height="365"></canvas><br />
+<input type="text" id="setter" placeholder="Enter new text here" autocomplete="off" autofocus="autofocus" /> <button type="button" id="stop">stop</button>
+<script type="text/javascript" src="js/components/requirejs/require.js" data-main="js/demo"></script>
+</body>
+</html>
