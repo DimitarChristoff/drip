@@ -30,9 +30,15 @@ define(function(require){
 		implement: [options, emitter],
 
 		options: {
-			GRAVITY: 100 / 1000,
-			font: '96px \'Arial\'',
-			fillStyle: 'White',
+			// affects speed of drip on letters
+			gravity: 70 / 1000,
+			dripSpeed: 0.5,
+			// overall particle strength
+			strength: 15,
+			// font settings
+			fontSize: 96,
+			fontFamily: 'Arial',
+			// starting text
 			text: ''
 		},
 
@@ -64,9 +70,16 @@ define(function(require){
 			this.pixels = this.context.getImageData(0, 0, this.canvasW, this.canvasH);
 			this.pl = this.pixels.data.length;
 			this.data = this.pixels.data;
+			this.colourMap = [[200,200,200], [240,240,255]];
 		},
 
-		setText: function(str, font, fill){
+		setFont: function(size, family){
+			size || (size = this.options.fontSize);
+			family || (family = this.options.fontFamily);
+			return [size, 'px', ' "', family, '"'].join('');
+		},
+
+		setText: function(str, fontSize, fontFamily){
 			var dummy = document.createElement('canvas'),
 				dummyContext;
 
@@ -74,9 +87,11 @@ define(function(require){
 			dummy.height = this.canvasH;
 
 			dummyContext = dummy.getContext('2d');
-			dummyContext.font = font || this.options.font;
-			dummyContext.fillStyle = fill || this.options.fillStyle;
-			dummyContext.fillText(str, (this.canvasW - dummyContext.measureText(str).width) / 2, this.canvasH / 2);
+
+			fontSize || (fontSize = this.options.fontSize);
+			dummyContext.font = this.setFont(fontSize, fontFamily);
+			dummyContext.fillStyle = 'White';
+			dummyContext.fillText(str, (this.canvasW - dummyContext.measureText(str).width) / 2, (this.canvasH + fontSize / 2) / 2);
 
 			this.textPixels = dummyContext.getImageData(0, 0, this.canvasW, this.canvasH);
 			dummy = dummyContext = null;
@@ -89,27 +104,30 @@ define(function(require){
 				p,
 				particles = this.particles,
 				o = this.options,
-				d;
+				d,
+				isText,
+				rgb,
+				op;
 
 			for (; i < particles.length; i++){
 				p = particles[i];
-
-				p.vy += o.GRAVITY * p.s;
+				rgb = this.colourMap[isText = this.getPixel(p.x, p.y)];
+				d = 1 - isText * o.dripSpeed;
+				p.vy += o.gravity * p.s;
 				p.vx *= 0.99;
 				p.vy *= 0.99;
-				d = 1 - (this.getPixel(p.x, p.y).r / 0xff) * 0.6;
 				p.vx *= d;
 				p.vy *= d;
 				p.x += p.vx;
 				p.y += p.vy;
 
-				this.setPixel(p.x, p.y, 255, 225, 255);
+				this.setPixel(p.x, p.y, rgb, i < 96 ? 251 - i : 96);
 
 				if (p.y > this.canvasH)
 					particles.splice(i, 1);
 			}
 
-			i = 5;
+			i = o.strength;
 			while(i--)
 				this.addParticle(Math.random() * this.canvasW, 0, Math.random() + 0.5);
 
@@ -121,63 +139,60 @@ define(function(require){
 		start: function(){
 			this.boundRender = this.render.bind(this);
 			this.render();
+			return this.trigger('start');
 		},
 
 		stop: function(){
 			cancelAnimationFrame(this.frame);
 			delete this.frame, this.boundRender;
+			return this.trigger('stop');
 		},
 
 		addParticle: function(x, y, s){
 			this.particles.push(new Particle(x, y, 0, 0, s, 0xFFFFFF));
 		},
 
-		setPixel: function(x, y, r, g, b){
+		setPixel: function(x, y, rgb, o){
 			var idx,
 				pixels = this.pixels;
 
 			if (x >= 0 && x < this.canvasW && y >= 0 && y < this.canvasH){
 				idx = ((x | 0) + (y | 0) * this.canvasW) * 4;
-				pixels.data[idx + 0] = r;
-				pixels.data[idx + 1] = g;
-				pixels.data[idx + 2] = b;
-				pixels.data[idx + 3] = 252;
+				pixels.data[idx++] = rgb[0];
+				pixels.data[idx++] = rgb[1];
+				pixels.data[idx++] = rgb[2];
+				pixels.data[idx++] = o;
 			}
 		},
 
 		getPixel: function(x, y){
 			var idx,
-				ret = {
-					r: 0,
-					g: 0,
-					b: 0
-				}, pixels = this.textPixels;
+				ret = 0,
+				pixels = this.textPixels;
 
-			if (pixels && x >= 0 && x < this.canvasW && y >= 0 && y < this.canvasH){
+			if (x >= 0 && x < this.canvasW && y >= 0 && y < this.canvasH){
 				idx = ((x | 0) + (y | 0) * this.canvasW) * 4;
-				ret.r = pixels.data[idx + 0];
-				ret.g = pixels.data[idx + 1];
-				ret.b = pixels.data[idx + 2];
+				ret = +(pixels.data[idx] / 255 === 1);
 			}
 			return ret;
 		},
 
 		fadeout: function(){
 			var i = 3,
-				pixels = this.data,
+				pixelsData = this.data,
 				l = this.pl,
 				a;
 
 			for (; i < l; i += 4){
-				a = pixels[i];
-				if (a < 253){
+				a = pixelsData[i];
+				if (a < 255){
 					if (a < 36)
-						pixels[i] = 0;
+						pixelsData[i] = 0;
 					else if (a < 66){
-						pixels[i] *= 0.985;
+						pixelsData[i] *= 0.785;
 					}
 					else {
-						pixels[i] *= 0.76;
+						pixelsData[i] *= 0.96;
 					}
 				}
 			}

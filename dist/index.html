@@ -4,13 +4,17 @@
 	<title>dripping text</title>
 	<style>
 		body {
-			background: black;
+			background: #000000;
 			font-family: arial;
 			color: #444;
 		}
 
 		a, a:visited {
 			color: #85afde;
+		}
+
+		#freezer {
+			background: linear-gradient(rgba(200,180,240,.7), rgba(0,0,0,.0));
 		}
 
 		#setter {
@@ -35,7 +39,7 @@
 </head>
 <body>
 
-<canvas id="freezer" width="800" height="400"></canvas><br />
+<canvas id="freezer" width="800" height="220"></canvas><br />
 <input type="text" id="setter" placeholder="Enter new text here" autocomplete="off" autofocus="autofocus" /> <button type="button" id="stop">stop</button>
 <div>
 	Source: <a href="https://github.com/DimitarChristoff/drip">https://github.com/DimitarChristoff/drip</a>
