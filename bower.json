@@ -1,0 +1,24 @@
+{
+  "name": "freezer",
+  "version": "0.0.1",
+  "homepage": "https://github.com/DimitarChristoff/freezer",
+  "authors": [
+    "DimitarChristoff <christoff@gmail.com>"
+  ],
+  "description": "canvas stuff",
+  "main": "src/freezer.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "dist/js/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "primish": "~0.1.5",
+    "requirejs": "~2.1.9"
+  }
+}
