@@ -20,7 +20,7 @@ define(function(require){
 	}, false);
 
 	document.getElementById('stop').addEventListener('click', function(){
-		var method = pt.frame ? 'stop' : 'render',
+		var method = pt.frame ? 'stop' : 'start',
 			text = pt.frame ? 'start' : 'stop';
 
 		pt[method]();

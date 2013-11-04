@@ -52,7 +52,7 @@ define(function(require){
 			this.setElements();
 			this.setText(this.options.text);
 			this.trigger('ready');
-			this.render();
+			this.start();
 		},
 
 		setElements: function(){
@@ -109,18 +109,23 @@ define(function(require){
 					particles.splice(i, 1);
 			}
 
-			i = 3;
+			i = 5;
 			while(i--)
 				this.addParticle(Math.random() * this.canvasW, 0, Math.random() + 0.5);
 
 			this.context.putImageData(this.pixels, 0, 0);
 			this.fadeout();
-			this.frame = requestAnimationFrame(this.render.bind(this));
+			this.frame = requestAnimationFrame(this.boundRender);
+		},
+
+		start: function(){
+			this.boundRender = this.render.bind(this);
+			this.render();
 		},
 
 		stop: function(){
 			cancelAnimationFrame(this.frame);
-			delete this.frame;
+			delete this.frame, this.boundRender;
 		},
 
 		addParticle: function(x, y, s){
