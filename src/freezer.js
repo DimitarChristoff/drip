@@ -1,9 +1,6 @@
 define(function(require){
 	'use strict';
 
-	// forked from http://wonderfl.net/c/g9s1/
-	// based upon work from clockmaker
-
 	var prime = require('components/primish/prime'),
 		options = require('components/primish/options'),
 		emitter = require('components/primish/emitter'),
