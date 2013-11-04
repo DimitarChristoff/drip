@@ -1,4 +1,4 @@
-define(function(require){
+require(function(require){
 	'use strict';
 
 	String.rot13 = function(str){
@@ -10,7 +10,7 @@ define(function(require){
 	var particleText = require('../../src/drip'),
 		text = decodeURIComponent(window.location.hash),
 		pt = new particleText(document.getElementById('freezer'), {
-			text: text ? String.rot13(text) : 'MONDAY SUCKS'
+			text: text ? String.rot13(text.replace('#','')) : 'MONDAY SUCKS'
 		});
 
 	document.getElementById('setter').addEventListener('change', function(){
