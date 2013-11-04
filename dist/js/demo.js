@@ -1,10 +1,10 @@
 define(function(require){
 	'use strict';
 
-	var particleText = require('../../src/freezer');
+	var particleText = require('../../src/drip');
 
 	var pt = new particleText(document.getElementById('freezer'), {
-		text: 'CODE FREEZE'
+		text: 'MONDAY SUCKS'
 	});
 
 	document.getElementById('setter').addEventListener('change', function(){

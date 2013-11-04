@@ -1,12 +1,12 @@
 {
-  "name": "freezer",
+  "name": "drip",
   "version": "0.0.1",
-  "homepage": "https://github.com/DimitarChristoff/freezer",
+  "homepage": "https://github.com/DimitarChristoff/drip",
   "authors": [
     "DimitarChristoff <christoff@gmail.com>"
   ],
   "description": "canvas stuff",
-  "main": "src/freezer.js",
+  "main": "src/drip.js",
   "license": "MIT",
   "private": true,
   "ignore": [
