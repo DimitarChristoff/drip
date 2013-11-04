@@ -18,7 +18,7 @@ Then open `dist/index.html` in your browser (web server due to requirejs).
 
 ## Demo
 
-http://fragged.org/freezer/dist/ - may have inappropriate text
+http://fragged.org/drip/dist/ - may have inappropriate text
 
 ## Caveats / todos
 
