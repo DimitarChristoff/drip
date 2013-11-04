@@ -1,9 +1,9 @@
-freezer
-=======
+drip
+====
 
-A small canvas experiment with text, pixels and snow.
+A small canvas experiment with text, pixels and rain.
 
-Forked from http://wonderfl.net/c/g9s1/ and ased upon work from clockmaker.
+Forked from flash here: http://wonderfl.net/c/g9s1/
 
 Uses: `primish`
 
