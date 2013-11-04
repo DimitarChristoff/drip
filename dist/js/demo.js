@@ -1,3 +1,7 @@
+require.config({
+	urlArgs: 'b=' + +new Date
+});
+
 define(function(require){
 	'use strict';
 
