@@ -62,6 +62,8 @@ define(function(require){
 			this.canvasW = canvas.width;
 			this.canvasH = canvas.height;
 			this.pixels = this.context.getImageData(0, 0, this.canvasW, this.canvasH);
+			this.pl = this.pixels.data.length;
+			this.data = this.pixels.data;
 		},
 
 		setText: function(str, font, fill){
@@ -111,8 +113,8 @@ define(function(require){
 			while(i--)
 				this.addParticle(Math.random() * this.canvasW, 0, Math.random() + 0.5);
 
-			this.fadeout();
 			this.context.putImageData(this.pixels, 0, 0);
+			this.fadeout();
 			this.frame = requestAnimationFrame(this.render.bind(this));
 		},
 
@@ -157,20 +159,20 @@ define(function(require){
 
 		fadeout: function(){
 			var i = 3,
-				pixels = this.pixels,
-				l = pixels.data.length,
+				pixels = this.data,
+				l = this.pl,
 				a;
 
 			for (; i < l; i += 4){
-				a = pixels.data[i];
+				a = pixels[i];
 				if (a < 253){
 					if (a < 36)
-						pixels.data[i] = 0;
+						pixels[i] = 0;
 					else if (a < 66){
-						pixels.data[i] *= 0.985;
+						pixels[i] *= 0.985;
 					}
 					else {
-						pixels.data[i] *= 0.76;
+						pixels[i] *= 0.76;
 					}
 				}
 			}
