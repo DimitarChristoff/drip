@@ -14,13 +14,34 @@ define(function(require){
 	var particleText = require('../../src/drip'),
 		text = decodeURIComponent(window.location.hash),
 		pt = new particleText(document.getElementById('freezer'), {
-			text: text ? String.rot13(text).replace('#', '') : 'MONDAY SUCKS'
+			text: text ? String.rot13(text).replace('#', '') : 'HELLO WORLD'
 		});
+
+	(function(){
+		var options = document.querySelector('div.optionsContainer'),
+			temp,
+			iterator = function(key){
+				temp = document.createElement('input');
+				temp.name = key;
+				temp.value = pt.options[key];
+				temp.placeholder = temp.title = 'Enter ' + key;
+				temp.addEventListener('change', function(){
+					pt.options[key] = this.value;
+				});
+				options.appendChild(temp);
+			};
+
+		for (var key in pt.options){
+			iterator(key);
+		}
+	}());
+
 
 	document.getElementById('setter').addEventListener('change', function(){
 		var val = this.value.toUpperCase();
 		pt.setText(val);
 		window.location.hash = encodeURIComponent(String.rot13(val));
+		this.value = '';
 	}, false);
 
 	document.getElementById('stop').addEventListener('click', function(){

@@ -4,9 +4,10 @@
 	<title>dripping text</title>
 	<style>
 		body {
-			background: #000000;
+			background: #888888;
 			font-family: arial;
 			color: #444;
+			margin: 0;
 		}
 
 		a, a:visited {
@@ -14,16 +15,20 @@
 		}
 
 		#freezer {
-			background: linear-gradient(rgba(200,180,240,.7), rgba(0,0,0,.0));
+			/*background: linear-gradient(rgba(200,180,240,.7), rgba(0,0,0,.0));*/
 		}
 
-		#setter {
-			background: black;
+		input {
+			background: rgba(0,0,0,.5);
+			box-shadow: inset 0px 0px 2px rgba(0,0,0,.7);
 			border: 1px solid #222222;
 			padding: 8px;
 			color: #ccc;
-			width: 683px;
 			font-size: 24px;
+		}
+
+		#setter {
+			width: 683px;
 		}
 
 		#stop {
@@ -35,12 +40,31 @@
 			width: 100px;
 		}
 
+		.left {
+			float: left;
+		}
+
+		.clear {
+			clear: both;
+		}
+
+		.optionsContainer input {
+			width: 60px;
+			display: block;
+			margin: 4px;
+			padding: 4px;
+			font-size: 12px;
+		}
 	</style>
 </head>
 <body>
-
-<canvas id="freezer" width="800" height="220"></canvas><br />
-<input type="text" id="setter" placeholder="Enter new text here" autocomplete="off" autofocus="autofocus" /> <button type="button" id="stop">stop</button>
+<div class="left">
+	<canvas id="freezer" width="800" height="200"></canvas><br />
+	<input type="text" id="setter" placeholder="Enter new text here" autocomplete="off" autofocus="autofocus" /> <button type="button" id="stop">stop</button>
+</div>
+<div class="left optionsContainer">
+</div>
+<div class="clear"></div>
 <div>
 	Source: <a href="https://github.com/DimitarChristoff/drip">https://github.com/DimitarChristoff/drip</a>
 </div>
