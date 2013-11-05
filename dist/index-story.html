@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>dripping text</title>
+	<style>
+		body {
+			background: #444444;
+			font-family: arial;
+			color: #000;
+			margin: 0;
+		}
+
+		a, a:visited {
+			color: #85afde;
+		}
+
+		#freezer {
+			/*background: linear-gradient(rgba(200,180,240,.7), rgba(0,0,0,.0));*/
+		}
+
+		input {
+			background: rgba(0,0,0,.5);
+			box-shadow: inset 0px 0px 2px rgba(0,0,0,.7);
+			border: 1px solid #222222;
+			padding: 8px;
+			color: #ccc;
+			font-size: 24px;
+		}
+
+		.optionsContainer input {
+			width: 60px;
+			display: block;
+			margin: 4px;
+			padding: 4px;
+			font-size: 12px;
+		}
+
+	</style>
+</head>
+<body>
+<div>
+	<canvas id="freezer" width="800" height="200"></canvas><br />
+</div>
+<div>
+	Source: <a href="https://github.com/DimitarChristoff/drip">https://github.com/DimitarChristoff/drip</a>
+</div>
+<script type="text/javascript" src="js/components/requirejs/require.js" data-main="js/demo-story"></script>
+</body>
+</html>

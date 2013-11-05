@@ -160,7 +160,7 @@ define(function(require){
 				pixels = this.pixels;
 
 			if (x >= 0 && x < this.canvasW && y >= 0 && y < this.canvasH){
-				idx = ((x | 0) + (y | 0) * this.canvasW) * 4;
+				idx = ((x << 0) + (y << 0) * this.canvasW) * 4;
 				pixels.data[idx++] = rgb[0];
 				pixels.data[idx++] = rgb[1];
 				pixels.data[idx++] = rgb[2];
@@ -174,7 +174,7 @@ define(function(require){
 				pixels = this.textPixels;
 
 			if (x >= 0 && x < this.canvasW && y >= 0 && y < this.canvasH){
-				idx = ((x | 0) + (y | 0) * this.canvasW) * 4;
+				idx = ((x << 0) + (y << 0) * this.canvasW) * 4;
 				ret = +(pixels.data[idx] / 255 === 1);
 			}
 			return ret;
