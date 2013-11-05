@@ -59,7 +59,7 @@ define(function(require){
 
 			this.setText(this.options.text);
 			delete this.options.text;
-			
+
 			this.trigger('ready');
 			this.start();
 		},
