@@ -18,29 +18,48 @@
 			/*background: linear-gradient(rgba(200,180,240,.7), rgba(0,0,0,.0));*/
 		}
 
-		input {
+		textarea, input {
 			background: rgba(0,0,0,.5);
 			box-shadow: inset 0px 0px 2px rgba(0,0,0,.7);
 			border: 1px solid #222222;
 			padding: 8px;
 			color: #ccc;
-			font-size: 24px;
+			font-size: 16px;
+			width: 784px;
+			height: 100px;
 		}
 
 		.optionsContainer input {
 			width: 60px;
 			display: block;
-			margin: 4px;
+			margin: 4px:;
 			padding: 4px;
 			font-size: 12px;
+			height: auto;
+
 		}
 
+		.left {
+			float: left;
+		}
+		.clearfix {
+			clear: both;
+		}
 	</style>
 </head>
 <body>
-<div>
+<div class="left">
 	<canvas id="freezer" width="800" height="200"></canvas><br />
+	<textarea id="t">Hello people.
+Greetings to:
+#javascript
+#mootools
+Canvas FTW
+</textarea>
 </div>
+<div class="left optionsContainer">
+</div>
+<div class="clearfix"><div>
 <div>
 	Source: <a href="https://github.com/DimitarChristoff/drip">https://github.com/DimitarChristoff/drip</a>
 </div>

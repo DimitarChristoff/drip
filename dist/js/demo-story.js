@@ -23,20 +23,63 @@ define(function(require){
 
 		extend: particleText,
 
+		timers: [],
+
 		say: function(what, delay){
+			
 			var i = -1,
 				cb = function(line){
 					this.setText(line.toUpperCase());
 				};
 
+			while(this.timers.length)
+				clearTimeout(this.timers.shift());
+
 			this.options.clearAfter && what.push('');
 
 			while(what.length){
-				setTimeout(cb.bind(this, what.shift()), delay * ++i);
+				this.timers.push(setTimeout(cb.bind(this, what.shift()), delay * ++i));
 			}
 		}
 	});
 
 	var s = new storyText(document.getElementById('freezer'));
-	s.say('hello peoples,greetz to:,#javascript,#mootools,transitions own'.split(','), 5000);
+
+	var t = document.getElementById('t'),
+		out = function(){
+			var val = this.value.split('\n');
+			s.say(val.slice(), 5000);
+			window.location.hash = encodeURIComponent(String.rot13(val.join(';')));
+		};
+
+	t.addEventListener('change', out, false);
+
+	var text = decodeURIComponent(window.location.hash);
+	if (text){
+		t.value = String.rot13(text).replace('#', '').split(';').join('\n');
+	}
+
+	out.call(t);
+
+	(function(){
+		var options = document.querySelector('div.optionsContainer'),
+			temp,
+			iterator = function(key){
+				temp = document.createElement('input');
+				temp.name = key;
+				temp.value = s.options[key];
+				temp.placeholder = temp.title = 'Enter ' + key;
+				temp.addEventListener('change', function(){
+					s.options[key] = this.value;
+				});
+				options.appendChild(temp);
+			};
+
+		for (var key in s.options){
+			iterator(key);
+		}
+	}());
+
+	
+
 });
