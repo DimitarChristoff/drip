@@ -43,7 +43,10 @@ define(function(require){
 		}
 	});
 
-	var s = new storyText(document.getElementById('freezer'));
+	var e = document.getElementById('freezer');
+	e.width =  document.body.offsetWidth;
+
+	var s = new storyText(e);
 
 	var t = document.getElementById('t'),
 		out = function(){

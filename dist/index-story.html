@@ -4,10 +4,16 @@
 	<title>dripping text</title>
 	<style>
 		body {
-			background: #444444;
+			background: #888;
 			font-family: arial;
 			color: #000;
 			margin: 0;
+		}
+
+		.src {
+			font-size: 10px;
+			text-align: center;
+			margin: 10px;
 		}
 
 		a, a:visited {
@@ -15,7 +21,9 @@
 		}
 
 		#freezer {
-			/*background: linear-gradient(rgba(200,180,240,.7), rgba(0,0,0,.0));*/
+			background: linear-gradient(rgba(100,180,240,.7), rgba(50,50,50,.0));
+			border-bottom: 1px solid black;
+			box-shadow: 0 0 4px rgba(0,0,0,.5);
 		}
 
 		textarea, input {
@@ -29,6 +37,10 @@
 			height: 100px;
 		}
 
+		.optionsContainer {
+			margin-left: 10px;
+			margin-right: 10px;
+		}
 		.optionsContainer input {
 			width: 60px;
 			display: block;
@@ -36,11 +48,14 @@
 			padding: 4px;
 			font-size: 12px;
 			height: auto;
-
+			margin-bottom: 10px;
 		}
 
 		.left {
 			float: left;
+		}
+		.right {
+			float: right;
 		}
 		.clearfix {
 			clear: both;
@@ -48,21 +63,21 @@
 	</style>
 </head>
 <body>
-<div class="left">
-	<canvas id="freezer" width="800" height="200"></canvas><br />
-	<textarea id="t">Hello people.
+	<div>
+		<canvas id="freezer" height="200"></canvas><br />
+	</div>
+	<div class="left optionsContainer"></div>
+	<div class="left">
+		<textarea id="t">Hello people.
 Greetings to:
 #javascript
 #mootools
-Canvas FTW
-</textarea>
-</div>
-<div class="left optionsContainer">
-</div>
-<div class="clearfix"><div>
-<div>
-	Source: <a href="https://github.com/DimitarChristoff/drip">https://github.com/DimitarChristoff/drip</a>
-</div>
-<script type="text/javascript" src="js/components/requirejs/require.js" data-main="js/demo-story"></script>
+Canvas FTW</textarea>
+		<div class="src">
+			Source: <a href="https://github.com/DimitarChristoff/drip">https://github.com/DimitarChristoff/drip</a>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<script type="text/javascript" src="js/components/requirejs/require.js" data-main="js/demo-story"></script>
 </body>
 </html>
