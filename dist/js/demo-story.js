@@ -19,8 +19,15 @@ define(function(require){
 		options: prime.merge(particleText.prototype.options, {
 			clearAfter: true,
 			fontSize: 90,
+			fontFamily: 'Lato',
 			strength: 30,
-			delay: 6000
+			delay: 8000,
+			colourMap: {
+				// drop colours
+				0: [170,170,200],
+				// over text colours
+				1: [200,200,230]
+			}
 		}),
 
 		extend: particleText,
@@ -69,6 +76,8 @@ define(function(require){
 	(function(){
 		var options = document.querySelector('div.optionsContainer'),
 			temp,
+			key,
+			t,
 			iterator = function(key){
 				temp = document.createElement('input');
 				temp.name = key;
@@ -80,8 +89,9 @@ define(function(require){
 				options.appendChild(temp);
 			};
 
-		for (var key in s.options){
-			iterator(key);
+		for (key in s.options){
+			t = typeof s.options[key];
+			t !== 'object' && t !== 'boolean' && iterator(key);
 		}
 	}());
 

@@ -20,6 +20,8 @@ define(function(require){
 	(function(){
 		var options = document.querySelector('div.optionsContainer'),
 			temp,
+			t,
+			key,
 			iterator = function(key){
 				temp = document.createElement('input');
 				temp.name = key;
@@ -31,8 +33,9 @@ define(function(require){
 				options.appendChild(temp);
 			};
 
-		for (var key in pt.options){
-			iterator(key);
+		for (key in pt.options){
+			t = typeof pt.options[key];
+			t !== 'object' && t !== 'boolean' && iterator(key);
 		}
 	}());
 

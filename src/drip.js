@@ -39,7 +39,13 @@ define(function(require){
 			fontSize: 96,
 			fontFamily: 'Arial',
 			// starting text
-			text: ''
+			text: '',
+			colourMap: {
+				// drop colours
+				0: [200,200,200],
+				// over text colours
+				1: [240,240,255]
+			}
 		},
 
 		/**
@@ -73,7 +79,6 @@ define(function(require){
 			this.pixels = this.context.getImageData(0, 0, this.canvasW, this.canvasH);
 			this.pl = this.pixels.data.length;
 			this.data = this.pixels.data;
-			this.colourMap = [[200,200,200], [240,240,255]];
 		},
 
 		setFont: function(size, family){
@@ -114,7 +119,7 @@ define(function(require){
 
 			for (; i < particles.length; i++){
 				p = particles[i];
-				rgb = this.colourMap[isText = this.getPixel(p.x, p.y)];
+				rgb = o.colourMap[isText = this.isPixelOverText(p.x, p.y)];
 				d = 1 - isText * o.dripSpeed;
 				p.vy += o.gravity * p.s;
 				p.vx *= 0.99;
@@ -168,7 +173,7 @@ define(function(require){
 			}
 		},
 
-		getPixel: function(x, y){
+		isPixelOverText: function(x, y){
 			var idx,
 				ret = 0,
 				pixels = this.textPixels;
