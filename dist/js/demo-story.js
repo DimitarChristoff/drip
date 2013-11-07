@@ -18,8 +18,8 @@ define(function(require){
 
 		options: prime.merge(particleText.prototype.options, {
 			clearAfter: true,
-			fontSize: 90,
-			fontFamily: 'Lato',
+			fontSize: 110,
+			fontFamily: 'Racing Sans One',
 			strength: 30,
 			delay: 8000,
 			colourMap: {
