@@ -18,7 +18,9 @@ define(function(require){
 
 		options: prime.merge(particleText.prototype.options, {
 			clearAfter: true,
-			fontSize: 78
+			fontSize: 90,
+			strength: 30,
+			delay: 6000
 		}),
 
 		extend: particleText,
@@ -26,7 +28,7 @@ define(function(require){
 		timers: [],
 
 		say: function(what, delay){
-			
+			delay || (delay = this.options.delay);
 			var i = -1,
 				cb = function(line){
 					this.setText(line.toUpperCase());
@@ -51,7 +53,7 @@ define(function(require){
 	var t = document.getElementById('t'),
 		out = function(){
 			var val = this.value.split('\n');
-			s.say(val.slice(), 5000);
+			s.say(val.slice());
 			window.location.hash = encodeURIComponent(String.rot13(val.join(';')));
 		};
 
