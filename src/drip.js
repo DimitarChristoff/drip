@@ -1,13 +1,13 @@
 define(function(require){
 	'use strict';
 
-	var prime = require('components/primish/prime'),
+	var primish = require('components/primish/primish'),
 		options = require('components/primish/options'),
 		emitter = require('components/primish/emitter'),
 		requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame,
 		cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
 
-	var Particle = prime({
+	var Particle = primish({
 		/**
 		 * @constructor
 		 * @param {Number} x
@@ -25,7 +25,7 @@ define(function(require){
 		}
 	});
 
-	var particleText = prime({
+	var particleText = primish({
 
 		implement: [options, emitter],
 
@@ -114,8 +114,7 @@ define(function(require){
 				o = this.options,
 				d,
 				isText,
-				rgb,
-				op;
+				rgb;
 
 			for (; i < particles.length; i++){
 				p = particles[i];

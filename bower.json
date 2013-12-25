@@ -18,7 +18,7 @@
     "tests"
   ],
   "dependencies": {
-    "primish": "~0.1.5",
+    "primish": "~0.3.0",
     "requirejs": "~2.1.9"
   }
 }
